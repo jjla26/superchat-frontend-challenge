@@ -3,7 +3,8 @@ import LinkForm from '../components/LinkForm';
 import { repoDetails } from '../interfaces/interfaces';
 import { db } from '../utils/firebase'
 import classes from '../styles/Home.module.css'
-
+import RepositoryCard from '../components/RepositoryCard';
+import contributors from '../constants/Contributors'
 
 export default function Home() {
   const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' })
@@ -50,28 +51,17 @@ export default function Home() {
         </div>
         <div>{'=>'}</div>
         <div>
-          <h2>Preview</h2>
-          <div className={`card ${values.color}`}>
-            <div>
-              <p>Repository Owner: {values.username}</p>
-              <p>Repository Name: {values.repo}</p>
-              <p>Stars: 150</p>
-            </div>
-            <div>
-              <h5>Actions</h5>
-              <div className={classes.buttonsContainer}>
-                {values.follow && <button>Follow</button>}
-                {values.star && <button>Star</button>}
-                {values.fork && <button>Fork</button>}
-              </div>
-            </div>
-            <div>
-              <h5>Top 10 Contributors</h5>
-              <ol>
-                {[1,2,3,4,5,6,7,8,9,10].map( contributor => <li key={contributor}>name {contributor}</li>)}
-              </ol>
-            </div>
-          </div>
+          <RepositoryCard 
+            username={values.username}
+            repo={values.repo}
+            stars="10"
+            star={values.star}
+            follow={values.follow}
+            fork={values.fork}
+            color={values.color}
+            contributors={contributors}
+          />
+          
         </div>
       </div>
     </div>
