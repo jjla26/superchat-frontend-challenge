@@ -90,6 +90,15 @@ const LinkForm: FC<Props> = props => {
                   handleChangeValues(e.target.checked, 'fork')
                 }}/>
               <label>Fork button</label>
+              
+              <Field 
+                type="checkbox" 
+                name="download" 
+                onChange={(e:any) => {
+                  handleChange(e)
+                  handleChangeValues(e.target.checked, 'download')
+                }}/>
+              <label>Download button</label>
 
             </div>
           </div>
