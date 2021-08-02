@@ -7,7 +7,7 @@
 ## GithbLinks Demo
 
 #### If you want to visit the demo app open the next link:
-[](https://superchat-frontend-challenge-nine.vercel.app/)
+[GithubLinks](https://superchat-frontend-challenge-nine.vercel.app/)
 
 ### Features
 
