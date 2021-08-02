@@ -4,5 +4,11 @@ export interface repoDetails {
   follow?: boolean,
   star?: boolean,
   fork?: boolean,
-  color?: string
+  download?: boolean,
+  color?: string,
+  stars?: string,
+  contributors?: [{
+    name: string;
+    contributions: number;
+  }] | undefined
 }
