@@ -2,36 +2,57 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import colors from '../constants/Colors'
+import { db } from '../utils/firebase'
 
 
 export default function Home() {
   const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' })
+  const [ link, setLink ] = useState('')
 
-  console.log(values)
   const handleChangeValues = (value:any, name:string) => {
     setValues( prevState => ({
       ...prevState,
       [name]: value
     }))
   }
+
+  /** Function handles the form submit **/
+  const handleSubmit = async (values) => {
+    try {
+      let response= await fetch(`https://api.github.com/repos/${values.username}/${values.repo}`)
+      response = await response.json()
+      if(response.name) {
+        // when the repository exists then add the details to firebase
+        const link = await db.collection('repositories').add({
+          name: response.name, 
+          repo: response.owner.login, 
+          color: values.color, icon: 
+          response.owner.avatar_url
+        })
+        setLink(`${window.location.href}repo/${link.id}`)
+      }else{
+        console.log('The username or repository doesn\'t exist')
+      }
+    } catch (error) {
+      console.log('Ops! something happened')
+    }
+  }
   
   return (
     <div>
       <Formik
-       initialValues={{ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' }}
-       validate={values => {
-         const errors = {};
-         if(!values.username){
-           errors.username = "Required"
-         }
-         if(!values.repo){
-           errors.repo = "Required"
-         }
-         return errors;
-       }}
-       onSubmit={(values) => {
-         console.log("submitting",values)
-       }}
+        initialValues={{ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' }}
+        validate={values => {
+          const errors = {};
+          if(!values.username){
+            errors.username = "Required"
+          }
+          if(!values.repo){
+            errors.repo = "Required"
+          }
+          return errors;
+        }}
+        onSubmit={handleSubmit}
      >
        {({ handleChange }) => (
          <Form>
@@ -94,13 +115,13 @@ export default function Home() {
                 }} />
             </label>)}
           </div>
+
           <button type="submit">
             Create Link
           </button>
          </Form>
        )}
      </Formik>
-      
     </div>
   )
 }
