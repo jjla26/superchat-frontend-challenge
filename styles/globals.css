@@ -26,6 +26,7 @@ button {
   border: 1px solid gray;
   font-size: 16px;
   cursor: pointer;
+  margin: 5px;
 }
 
 button:hover {
@@ -40,7 +41,7 @@ button:active {
   border: 1px solid black;
   border-radius: 5px;
   width: 500px;
-  height: 500px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
