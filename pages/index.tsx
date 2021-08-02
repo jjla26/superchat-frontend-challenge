@@ -8,9 +8,11 @@ import RepositoryCard from '../components/RepositoryCard';
 import contributors from '../constants/Contributors'
 
 export default function Home() {
-  const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' })
+  const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, download: false, color: 'mustard' })
   const [ link, setLink ] = useState('')
   const [ path, setPath ] = useState('')
+  const [ message, setMessage ] = useState('')
+  const [ error, setError ] = useState('')
 
   const handleChangeValues = (value: string | boolean, name: string) => {
     setValues( prevState => ({
@@ -27,18 +29,22 @@ export default function Home() {
       if(result.name) {
         // when the repository exists then add the details to firebase
         const link = await db.collection('repositories').add({
-          username: result.owner.login, 
-          reponame: result.name, 
-          color: values.color, 
-          icon: result.owner.avatar_url
+          icon: result.owner.avatar_url,
+          ...values 
         })
         setPath(link.id)
         setLink(`${window.location.href}repositories/${link.id}`)
+        setMessage('The link was created succesfully')
+        setError('')
       }else{
-        console.log('The username or repository doesn\'t exist')
+        setMessage('')
+        setLink('')
+        setError('The username or repository doesn\'t exist')
       }
     } catch (error) {
-      console.log('Ops! something happened')
+      setMessage('')
+      setLink('')
+      setError('Ops! something happened')
     }
   }
   
@@ -55,12 +61,16 @@ export default function Home() {
             <div className={classes.linkContainer}>
               <Link href={`/repositories/${path}`}><a>{link}</a></Link>
               <button onClick={() => navigator.clipboard.writeText(link)}>Copy link</button>
+              {error && <div className="error">{error}</div>}
+              {message && <div>{message}</div>}
             </div>}
           </div>
         </div>
         <div>{'=>'}</div>
         <div>
+          <h2>Preview</h2>
           <RepositoryCard 
+            preview={true}
             username={values.username}
             repo={values.repo}
             stars="10"
@@ -68,6 +78,7 @@ export default function Home() {
             follow={values.follow}
             fork={values.fork}
             color={values.color}
+            download={values.download}
             contributors={contributors}
           />
         </div>
