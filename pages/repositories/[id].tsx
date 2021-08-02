@@ -13,6 +13,7 @@ export default function RepositoriesView() {
 
   const [ repo, setRepo ] = useState<null | repoDetails>(null)
   const [ loading, setLoading ] = useState<boolean>(true)
+  const [ error, setError ] = useState<string>('')
 
   const fetchData = useCallback(async () => {
     try {
@@ -35,9 +36,13 @@ export default function RepositoriesView() {
           ...values
         })
         setLoading(false)
+      } else {
+        setLoading(false)
+        setError('This link has not been created before')
       }
     } catch (error) {
-      console.log(error)
+      setError('Oops! Something happened. Try again')
+      setLoading(false)
     }
   }, [ id ])
 
@@ -54,7 +59,7 @@ export default function RepositoriesView() {
   return (
     <div className={classes.container}>
       <h1>GithubLinks</h1>  
-      <RepositoryCard 
+      {repo?.username &&<RepositoryCard 
         username={repo?.username}
         repo={repo?.repo}
         stars={repo?.stars}
@@ -62,8 +67,10 @@ export default function RepositoriesView() {
         color={repo?.color}
         follow={repo?.follow}
         fork={repo?.fork}
+        download={repo?.download}
         contributors={repo?.contributors}
-      />
+      />}
+      {error && <div>{error}</div>}
       <div className={classes.link}>
         <Link href='/'>Create a new link</Link>
       </div>
