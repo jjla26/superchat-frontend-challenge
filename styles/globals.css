@@ -78,5 +78,8 @@ button:active {
   color: red
 }
 
-
-
+@media screen and (max-width: 992px) {
+  .card {
+    width: 95%;
+  }
+}

@@ -15,11 +15,37 @@
   align-items: center;
 }
 
+.cardContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .linkContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.arrow {
+  display: block;
+}
+
+@media screen and (max-width: 992px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .homeContainer {
+    padding: 5px 0px;
+  }
+
+  .arrow {
+    display: none;
+  }
 }
 
 

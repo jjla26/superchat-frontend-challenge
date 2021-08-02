@@ -52,7 +52,7 @@ export default function Home() {
     <div className={classes.homeContainer}>
       <h1 className={classes.title}>GithubLinks</h1>
       <div className={classes.content}>
-        <div>
+        <div className={classes.cardContainer}>
           <h2>Create your link here!</h2>
           <div className="card">
             <LinkForm handleSubmit={handleSubmit} handleChangeValues={handleChangeValues} />
@@ -66,8 +66,8 @@ export default function Home() {
             </div>}
           </div>
         </div>
-        <div>{'=>'}</div>
-        <div>
+        <div className={classes.arrow}>{'=>'}</div>
+        <div className={classes.cardContainer}>
           <h2>Preview</h2>
           <RepositoryCard 
             preview={true}
