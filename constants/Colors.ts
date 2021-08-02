@@ -1,19 +1,19 @@
 const Colors = [
   {
     id: 1,
-    name: 'mustard'
+    name: 'sand'
   },
   {
     id: 2,
-    name: 'gray'
+    name: 'green'
   },
   {
     id: 3,
-    name: 'pink'
+    name: 'orange'
   },
   {
     id: 4,
-    name: 'blue'
+    name: 'gray'
   }
 ]
 

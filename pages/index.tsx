@@ -8,7 +8,7 @@ import RepositoryCard from '../components/RepositoryCard';
 import contributors from '../constants/Contributors'
 
 export default function Home() {
-  const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, download: false, color: 'mustard' })
+  const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, download: false, color: 'gray' })
   const [ link, setLink ] = useState('')
   const [ path, setPath ] = useState('')
   const [ message, setMessage ] = useState('')

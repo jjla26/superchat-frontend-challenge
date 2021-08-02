@@ -50,28 +50,28 @@ button:active {
   box-shadow: 2px 2px black;
 }
 
-.mustard {
-  background-color: #374045;
-  color: #D89216;
-  border: 1px solid #D89216;
+.sand {
+  background-color: #D3B589;
+  color: black;
+  border: 1px solid black
 }
   
+.green {
+  background-color: #4D5853;
+  color: white;
+  border: 1px solid white
+}
+
+.orange {
+  background-color: #C07948;
+  color: white;
+  border: 1px solid white
+}
+
 .gray {
-  background-color: #393E46;
-  color: #EEE;
-  border: 1px solid #EEE;
-}
-
-.blue {
-  background-color: #595B83;
-  color: #060930;
-  border: 1px solid #060930;
-}
-
-.pink {
-  background-color: #4D4545;
-  color: #ED8D8D;
-  border: 1px solid #ED8D8D;
+  background-color: #EBE8E6;
+  color: black;
+  border: 1px solid black;
 }
 
 .error {

@@ -15,7 +15,7 @@ const LinkForm: FC<Props> = props => {
 
   return (
     <Formik
-      initialValues={{ username: '', repo: '', follow: false, star: false, fork: false, download: false, color: 'mustard' }}
+      initialValues={{ username: '', repo: '', follow: false, star: false, fork: false, download: false, color: 'gray' }}
       validate={values => {
         const errors: repoDetails = {};
         if(!values.username){
