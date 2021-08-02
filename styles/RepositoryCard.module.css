@@ -2,3 +2,23 @@
   display: flex;
   justify-content: space-around;
 }
+
+.githubButton {
+  text-decoration: none;
+  height: 40px;
+  min-width: 60px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 10px
+}
+
+.githubButton:hover {
+  background-color: gray;
+}
+
+.githubButton:active {
+  background-color: #eaeaea;
+}
