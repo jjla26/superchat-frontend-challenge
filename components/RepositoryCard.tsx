@@ -4,28 +4,63 @@ import { repoDetails } from '../interfaces/interfaces'
 import classes from '../styles/RepositoryCard.module.css'
 
 const RepositoryCard: FC<repoDetails> = (props) => {
-  const { username, repo, color, follow, star, fork, stars, contributors } = props
+  const { username, repo, color, follow, star, fork, stars, contributors, download, preview } = props
+
+  const handleClick = (e:any) => {
+    if(preview){
+      e.preventDefault()
+    }
+  }
+
   return (
     <>
-    <h2>Preview</h2>
       <div className={`card ${color}`}>
         <div>
           <p>Repository Owner: {username}</p>
           <p>Repository Name: {repo}</p>
           <p>Stars: {stars}</p>
         </div>
-        <div>
+        { (follow || star || fork || download) && <div>
           <h5>Actions</h5>
           <div className={classes.buttonsContainer}>
-            {follow && <button className={`${color}`}>Follow</button>}
-            {star && <button className={`${color}`}>Star</button>}
-            {fork && <button className={`${color}`}>Fork</button>}
+            {follow && 
+              <a 
+                onClick={handleClick}
+                href={`https://github.com/${username}`} 
+                className={`${classes.githubButton} ${color}`} 
+                target="__blank">
+                  Follow
+              </a>}
+            {star && 
+              <a 
+                onClick={handleClick}
+                href={`https://github.com/${username}/${repo}`} 
+                className={`${classes.githubButton} ${color}`} 
+                target="__blank">
+                  Star
+              </a>}
+            {fork && 
+              <a 
+                onClick={handleClick}
+                href={`https://github.com/${username}/${repo}/fork`} 
+                className={`${classes.githubButton} ${color}`} 
+                target="__blank">
+                  Fork
+              </a>}
+            {download && 
+              <a 
+                onClick={handleClick}
+                href={`https://github.com/${username}/${repo}/archive/HEAD.zip`} 
+                className={`${classes.githubButton} ${color}`} 
+                target="__blank">
+                  Download
+              </a>}
           </div>
-        </div>
+        </div>}
         <div>
           <h5>Top 10 Contributors</h5>
           <ol>
-            {contributors.map(contributor => <li key={contributor.name}>{contributor.name} - {contributor.contributions}</li>)}
+            {contributors?.map(contributor => <li key={contributor.name}>{contributor.name} - {contributor.contributions}</li>)}
           </ol>
         </div>
       </div>
