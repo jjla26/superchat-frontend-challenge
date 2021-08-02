@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-
-import colors from '../constants/Colors'
+import LinkForm from '../components/LinkForm';
+import { repoDetails } from '../interfaces/interfaces';
 import { db } from '../utils/firebase'
 
 
@@ -9,7 +8,7 @@ export default function Home() {
   const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' })
   const [ link, setLink ] = useState('')
 
-  const handleChangeValues = (value:any, name:string) => {
+  const handleChangeValues = (value: string | boolean, name: string) => {
     setValues( prevState => ({
       ...prevState,
       [name]: value
@@ -17,17 +16,17 @@ export default function Home() {
   }
 
   /** Function handles the form submit **/
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: repoDetails) => {
     try {
-      let response= await fetch(`https://api.github.com/repos/${values.username}/${values.repo}`)
-      response = await response.json()
-      if(response.name) {
+      const response = await fetch(`https://api.github.com/repos/${values.username}/${values.repo}`)
+      const result = await response.json()
+      if(result.name) {
         // when the repository exists then add the details to firebase
         const link = await db.collection('repositories').add({
-          username: response.owner.login, 
-          reponame: response.name, 
+          username: result.owner.login, 
+          reponame: result.name, 
           color: values.color, 
-          icon: response.owner.avatar_url
+          icon: result.owner.avatar_url
         })
         setLink(`${window.location.href}repo/${link.id}`)
       }else{
@@ -40,88 +39,10 @@ export default function Home() {
   
   return (
     <div>
-      <Formik
-        initialValues={{ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' }}
-        validate={values => {
-          const errors = {};
-          if(!values.username){
-            errors.username = "Required"
-          }
-          if(!values.repo){
-            errors.repo = "Required"
-          }
-          return errors;
-        }}
-        onSubmit={handleSubmit}
-     >
-       {({ handleChange }) => (
-         <Form>
-          <Field 
-            type="text" 
-            name="username" 
-            onChange={(e:any) => {
-              handleChange(e)
-              handleChangeValues(e.target.value, 'username')
-            }}/>
-          <ErrorMessage name="username" component="div"  />
-
-          <Field 
-            type="text" 
-            name="repo" 
-            onChange={(e:any) => {
-              handleChange(e)
-              handleChangeValues(e.target.value, 'repo')
-            }} />
-          <ErrorMessage name="repo" component="div" />
-
-          <Field 
-            type="checkbox" 
-            name="follow" 
-            onChange={(e:any) => {
-              handleChange(e)
-              handleChangeValues(e.target.checked, 'follow')
-            }}/>
-          <label>Follow button</label>
-
-          <Field 
-            type="checkbox" 
-            name="star" 
-            onChange={(e:any) => {
-              handleChange(e)
-              handleChangeValues(e.target.checked, 'star')
-            }}/>
-          <label>Star button</label>
-
-          <Field 
-            type="checkbox" 
-            name="fork" 
-            onChange={(e:any) => {
-              handleChange(e)
-              handleChangeValues(e.target.checked, 'fork')
-            }}/>
-          <label>Fork button</label>
-
-          <div id="my-radio-group">Color</div>
-          <div role="group" aria-labelledby="my-radio-group" >
-            {colors.map(color =>
-            <label key={color.id}>
-              <Field 
-                type="radio" 
-                name="color" 
-                value={color.name} 
-                onChange={(e:any) => {
-                  handleChange(e)
-                  handleChangeValues(e.target.value, 'color')
-                }} />
-            </label>)}
-          </div>
-
-          <button type="submit">
-            Create Link
-          </button>
-         </Form>
-       )}
-     </Formik>
+      <h2>Create your link here!</h2>
+      <div>
+        <LinkForm handleSubmit={handleSubmit} handleChangeValues={handleChangeValues} />
+      </div>
     </div>
   )
 }
