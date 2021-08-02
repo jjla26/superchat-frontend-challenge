@@ -24,10 +24,10 @@ export default function Home() {
       if(response.name) {
         // when the repository exists then add the details to firebase
         const link = await db.collection('repositories').add({
-          name: response.name, 
-          repo: response.owner.login, 
-          color: values.color, icon: 
-          response.owner.avatar_url
+          username: response.owner.login, 
+          reponame: response.name, 
+          color: values.color, 
+          icon: response.owner.avatar_url
         })
         setLink(`${window.location.href}repo/${link.id}`)
       }else{
