@@ -15,6 +15,7 @@ export default function RepositoriesView() {
   const [ loading, setLoading ] = useState<boolean>(true)
   const [ error, setError ] = useState<string>('')
 
+  /** function that fetch the information from firebase and github **/
   const fetchData = useCallback(async () => {
     try {
       let repositoryDetailsDb = await db.collection('repositories').doc(id).get()
