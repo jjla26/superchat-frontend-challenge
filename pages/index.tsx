@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link'
 import LinkForm from '../components/LinkForm';
 import { repoDetails } from '../interfaces/interfaces';
 import { db } from '../utils/firebase'
@@ -9,6 +10,7 @@ import contributors from '../constants/Contributors'
 export default function Home() {
   const [ values, setValues ] = useState({ username: '', repo: '', follow: false, star: false, fork: false, color: 'mustard' })
   const [ link, setLink ] = useState('')
+  const [ path, setPath ] = useState('')
 
   const handleChangeValues = (value: string | boolean, name: string) => {
     setValues( prevState => ({
@@ -30,7 +32,8 @@ export default function Home() {
           color: values.color, 
           icon: result.owner.avatar_url
         })
-        setLink(`${window.location.href}repo/${link.id}`)
+        setPath(link.id)
+        setLink(`${window.location.href}repositories/${link.id}`)
       }else{
         console.log('The username or repository doesn\'t exist')
       }
@@ -47,6 +50,12 @@ export default function Home() {
           <h2>Create your link here!</h2>
           <div className="card">
             <LinkForm handleSubmit={handleSubmit} handleChangeValues={handleChangeValues} />
+
+            {link && 
+            <div className={classes.linkContainer}>
+              <Link href={`/repositories/${path}`}><a>{link}</a></Link>
+              <button onClick={() => navigator.clipboard.writeText(link)}>Copy link</button>
+            </div>}
           </div>
         </div>
         <div>{'=>'}</div>
@@ -61,7 +70,6 @@ export default function Home() {
             color={values.color}
             contributors={contributors}
           />
-          
         </div>
       </div>
     </div>
