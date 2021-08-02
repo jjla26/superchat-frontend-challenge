@@ -4,16 +4,16 @@ import { repoDetails } from '../interfaces/interfaces'
 import classes from '../styles/RepositoryCard.module.css'
 
 interface Props {
-  username: string, 
-  repo: string, 
-  color: string, 
-  follow: boolean, 
-  star: boolean, 
-  fork: boolean, 
-  stars: number, 
-  contributors: Array<{name: string, contributions: number}>, 
-  download: boolean, 
-  preview: boolean
+  username: string | undefined, 
+  repo: string | undefined, 
+  color: string | undefined, 
+  follow: boolean | undefined, 
+  star: boolean | undefined, 
+  fork: boolean | undefined, 
+  stars: number | undefined, 
+  contributors: Array<{name: string, contributions: number}> | undefined, 
+  download: boolean | undefined, 
+  preview?: boolean
 }
 
 

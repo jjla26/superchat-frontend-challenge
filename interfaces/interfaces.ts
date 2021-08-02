@@ -6,7 +6,7 @@ export interface repoDetails {
   fork?: boolean,
   download?: boolean,
   color?: string,
-  stars?: string,
+  stars?: number,
   contributors?: [{
     name: string;
     contributions: number;
