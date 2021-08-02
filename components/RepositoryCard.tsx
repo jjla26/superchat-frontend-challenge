@@ -3,7 +3,21 @@ import { repoDetails } from '../interfaces/interfaces'
 
 import classes from '../styles/RepositoryCard.module.css'
 
-const RepositoryCard: FC<repoDetails> = (props) => {
+interface Props {
+  username: string, 
+  repo: string, 
+  color: string, 
+  follow: boolean, 
+  star: boolean, 
+  fork: boolean, 
+  stars: number, 
+  contributors: Array<{name: string, contributions: number}>, 
+  download: boolean, 
+  preview: boolean
+}
+
+
+const RepositoryCard: FC<Props> = (props) => {
   const { username, repo, color, follow, star, fork, stars, contributors, download, preview } = props
 
   const handleClick = (e:any) => {

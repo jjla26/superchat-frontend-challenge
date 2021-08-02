@@ -73,7 +73,7 @@ export default function Home() {
             preview={true}
             username={values.username}
             repo={values.repo}
-            stars="10"
+            stars={10}
             star={values.star}
             follow={values.follow}
             fork={values.fork}
