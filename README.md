@@ -2,7 +2,7 @@
 
 ![](githublinks-showcase.gif)
 
-##### GithubLinks is an app that allows you to create links of a specific github repository. This way you can create sharable links so people can interact easily with a repository
+##### GithubLinks is an app that allows you to create sharable links of a specific github repository. This way you can interact easily with a repository and also send the links to your friends or colleagues. 
 
 ## GithbLinks Demo
 
@@ -13,7 +13,7 @@
 
 ##### User Stories
 
-1. As a new user, I want to be able to insert a username and a repository name and get a link to interact with the repository.
+1. As a user, I want to be able to insert a username and a repository name and get a link to interact with the repository.
 2. As a user, I want to be able to chose the color of the repository card.
 3. As a user, I want to be able to chose the action buttons to interact with the repository.
 4. As a user, I want to be able to copy the repository link to share it.
@@ -28,7 +28,7 @@
 
 ### Do you want to experiment with this project?
 
-###### Clone this repository using: git clone https://github.com/jjla26/superchat-frontend-challenge.git. After cloning the repository run: `npm install` or `yarn add` to install all the dependencies and is ready to be used running: `npm run dev` or `yarn dev`.
+###### Clone this repository using: git clone https://github.com/jjla26/superchat-frontend-challenge.git. After cloning the repository run: `npm install` or `yarn add` to install all the dependencies. Now it is ready to be used. Run: `npm run dev` or `yarn dev` to start the local server.
 
 ###### The project is using firebase to store the repository links and data. Therefore, to make it work you will have to create a firebase project and initialize a firestore database.
 
@@ -44,4 +44,4 @@
   measurementId: ""
 };`
 
-##### Remember to replace the values for the ones in your firebase project
+###### Remember to replace the values for the ones in your firebase project
